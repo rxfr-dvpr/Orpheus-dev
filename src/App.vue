@@ -1,26 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Nav @themeChange="changeTheme" :lightTheme="lightTheme"/>
+  <Header :lightTheme="lightTheme"/>
+  <Main :lightTheme="lightTheme"/>
+  <Footer/>
+  <Preload/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavVue from './components/Nav.vue'
+import HeaderVue from './components/Header.vue'
+import MainVue from './components/Main.vue'
+import FooterVue from './components/Footer.vue'
+import PreloadVue from './components/Preload.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Nav: NavVue,
+    Header: HeaderVue,
+    Main: MainVue,
+    Footer: FooterVue,
+    Preload: PreloadVue
+  },
+  data() {
+    return {
+      lightTheme: false 
+    }
+  },
+  methods: {
+    changeTheme() {
+      this.lightTheme = !this.lightTheme
+      let body = document.querySelector('body')
+
+      if (this.lightTheme) {
+        body.classList.add('light-theme')  
+      } else {
+        body.classList.remove('light-theme')  
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
